@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rahel G. — Cybersecurity Analyst</title>
+<meta name="description" content="Cybersecurity analyst focused on SOC operations, threat detection, incident response, digital forensics, and GRC." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0F17;
+    --bg-raised: #0F1722;
+    --bg-card: #111C29;
+    --line: #1E2C3D;
+    --line-bright: #2A3B50;
+    --text: #E7EEF6;
+    --text-mid: #A7B6C8;
+    --text-dim: #6F8095;
+    --signal: #3FD6E2;
+    --signal-deep: #1FA9B6;
+    --amber: #F2B95C;
+    --maxw: 1080px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--signal);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "//";
+    color: var(--text-dim);
+  }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10, 15, 23, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.04em;
+  }
+  .brand span { color: var(--signal); }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; color: var(--text-mid);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--signal); }
+  .nav-toggle { display: none; background: none; border: 0; color: var(--text); cursor: pointer; }
+
+  @media (max-width: 720px) {
+    .nav-links {
+      position: absolute; top: 62px; left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: var(--bg-raised); border-bottom: 1px solid var(--line);
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+    }
+    .nav-links.open { max-height: 320px; }
+    .nav-links a { padding: 16px 28px; border-top: 1px solid var(--line); }
+    .nav-toggle { display: block; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: 96px 0 84px; overflow: hidden; }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, #000 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, #000 10%, transparent 70%);
+    opacity: 0.5;
+  }
+  .hero-glow {
+    position: absolute; z-index: 0; top: -120px; right: -80px;
+    width: 460px; height: 460px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(63,214,226,0.16), transparent 65%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .status {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.74rem;
+    letter-spacing: 0.12em; color: var(--text-mid);
+    border: 1px solid var(--line-bright); border-radius: 100px;
+    padding: 6px 14px; margin-bottom: 30px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 10px var(--signal); }
+  @media (prefers-reduced-motion: no-preference) {
+    .dot { animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; line-height: 1.04; letter-spacing: -0.02em;
+    font-size: clamp(2.7rem, 7vw, 4.6rem);
+    margin-bottom: 18px;
+  }
+  .hero-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem); font-weight: 500;
+    color: var(--text); margin-bottom: 22px;
+  }
+  .hero-role b { color: var(--signal); font-weight: 600; }
+  .hero-lead { max-width: 620px; color: var(--text-mid); font-size: 1.05rem; margin-bottom: 36px; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.06em;
+    padding: 12px 20px; border-radius: 8px; border: 1px solid var(--line-bright);
+    color: var(--text); transition: border-color 0.2s, color 0.2s, transform 0.2s, background 0.2s;
+  }
+  .btn:hover { border-color: var(--signal); color: var(--signal); transform: translateY(-2px); }
+  .btn-primary { background: var(--signal); color: #06262a; border-color: var(--signal); font-weight: 600; }
+  .btn-primary:hover { background: #5ce3ee; color: #06262a; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section { padding: 78px 0; border-top: 1px solid var(--line); }
+  .sec-head { margin-bottom: 42px; }
+  .sec-head h2 {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+    font-size: clamp(1.6rem, 3.4vw, 2.1rem); letter-spacing: -0.01em; margin-top: 14px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: start; }
+  .about-grid p { color: var(--text-mid); margin-bottom: 16px; }
+  .about-grid p b { color: var(--text); font-weight: 600; }
+  .profile-card {
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 24px;
+  }
+  .profile-card .mono { color: var(--text-dim); display: block; margin-bottom: 18px; }
+  .pc-row { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+  .pc-row:first-of-type { border-top: 0; }
+  .pc-row span:first-child { color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.04em; }
+  .pc-row span:last-child { color: var(--text); text-align: right; font-weight: 500; }
+  .pc-row .ok { color: var(--signal); }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 48px; }
+  .skill-block h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--signal); margin-bottom: 14px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 0.85rem; color: var(--text-mid);
+    border: 1px solid var(--line-bright); border-radius: 6px; padding: 5px 11px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .chip:hover { border-color: var(--signal-deep); color: var(--text); }
+  @media (max-width: 620px) { .skills-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- PROJECTS (case queue) ---------- */
+  .cases { display: grid; gap: 18px; }
+  .case {
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 24px 26px; transition: border-color 0.25s, transform 0.25s;
+  }
+  .case:hover { border-color: var(--line-bright); transform: translateY(-3px); }
+  .case-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+  .case-id { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-dim); }
+  .case-id b { color: var(--signal); font-weight: 600; }
+  .case-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-mid); border: 1px solid var(--line-bright); border-radius: 100px; padding: 3px 11px;
+  }
+  .case h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.22rem; font-weight: 600; margin-bottom: 9px; }
+  .case p { color: var(--text-mid); font-size: 0.97rem; margin-bottom: 16px; }
+  .case-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .tools { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tool { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-dim); }
+  .tool:not(:last-child)::after { content: " ·"; }
+  .case-link { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--signal); display: inline-flex; align-items: center; gap: 6px; }
+  .case-link:hover { gap: 10px; }
+  .case-link.pending { color: var(--text-dim); }
+
+  /* ---------- CONTACT ---------- */
+  .contact { text-align: center; }
+  .contact h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; margin: 14px 0 14px; letter-spacing: -0.01em; }
+  .contact p { color: var(--text-mid); max-width: 480px; margin: 0 auto 32px; }
+  .contact .cta-row { justify-content: center; }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0; }
+  .foot-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .foot-inner .mono { color: var(--text-dim); }
+
+  /* reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="brand">RG<span>::</span>sec</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">about</a>
+        <a href="#skills">skills</a>
+        <a href="#projects">projects</a>
+        <a href="#creds">credentials</a>
+        <a href="#contact">contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" style="border-top:0;">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="wrap hero-inner">
+      <div class="status"><span class="dot"></span> Security operations · Seattle, WA · Open to roles</div>
+      <h1>Rahel G.</h1>
+      <p class="hero-role">Cybersecurity Analyst — <b>SOC</b> · <b>Threat Detection</b> · <b>Incident Response</b> · <b>GRC</b></p>
+      <p class="hero-lead">Entry-level security analyst building hands-on experience in detection, investigation, and digital forensics — turning logs, packets, and alerts into clear, defensible findings. Currently pursuing an M.S. in Cyber Operations.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn" href="https://www.linkedin.com/in/rahelgalato19/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/RahelA03" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <span class="eyebrow">about</span>
+          <div class="sec-head" style="margin-bottom:24px;"><h2>Analyst by training, operator by experience.</h2></div>
+          <p>I'm transitioning into cybersecurity from a frontline security operations role, where I spend my days monitoring systems, investigating incidents, and managing access controls. That work taught me the analyst fundamentals — triage under pressure, careful documentation, and escalating what matters — before I ever touched a SIEM.</p>
+          <p>Now I pair that operational instinct with formal training: a <b>B.S. in Cybersecurity</b>, an <b>M.S. in Cyber Operations</b> in progress, and the <b>CompTIA Security+</b> certification. My focus areas are SOC monitoring and threat detection, incident response and forensics, and governance, risk, and compliance.</p>
+          <p>As a <b>U.S. citizen</b> eligible for a security clearance, I'm especially interested in roles defending critical systems — in the private sector or federal space.</p>
+        </div>
+        <div class="profile-card reveal">
+          <span class="mono">// profile</span>
+          <div class="pc-row"><span>focus</span><span>SOC · IR · GRC</span></div>
+          <div class="pc-row"><span>education</span><span>M.S. Cyber Ops <em style="color:var(--text-dim);font-style:normal">(in progress)</em></span></div>
+          <div class="pc-row"><span>certs</span><span>Security+</span></div>
+          <div class="pc-row"><span>citizenship</span><span class="ok">U.S. Citizen</span></div>
+          <div class="pc-row"><span>clearance</span><span class="ok">Eligible</span></div>
+          <div class="pc-row"><span>location</span><span>Seattle · open to DMV</span></div>
+          <div class="pc-row"><span>languages</span><span>English · Amharic</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">capabilities</span><h2>Skills &amp; tooling</h2></div>
+      <div class="skills-grid">
+        <div class="skill-block reveal">
+          <h3>Detection &amp; Monitoring</h3>
+          <div class="chips"><span class="chip">Splunk</span><span class="chip">SIEM</span><span class="chip">Security Monitoring</span><span class="chip">Threat Detection</span><span class="chip">Log Analysis</span><span class="chip">MITRE ATT&amp;CK</span></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>Forensics &amp; Incident Response</h3>
+          <div class="chips"><span class="chip">Incident Response</span><span class="chip">Digital Forensics</span><span class="chip">Autopsy</span><span class="chip">Chain of Custody</span><span class="chip">Root-Cause Analysis</span></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>Network &amp; Systems</h3>
+          <div class="chips"><span class="chip">Wireshark</span><span class="chip">Nmap</span><span class="chip">NetworkMiner</span><span class="chip">TCP/IP</span><span class="chip">Packet Analysis</span><span class="chip">Windows</span><span class="chip">Linux</span></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>Governance, Risk &amp; Compliance</h3>
+          <div class="chips"><span class="chip">NIST CSF</span><span class="chip">NIST 800-53</span><span class="chip">Risk Assessment</span><span class="chip">Vulnerability Assessment</span><span class="chip">RBAC</span></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>Automation &amp; Scripting</h3>
+          <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">IOC Enrichment</span><span class="chip">Power Automate</span></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>Professional</h3>
+          <div class="chips"><span class="chip">Technical Documentation</span><span class="chip">Reporting</span><span class="chip">Cross-Functional Collaboration</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">case queue</span><h2>Projects &amp; hands-on work</h2></div>
+      <div class="cases">
+
+        <article class="case reveal">
+          <div class="case-top">
+            <span class="case-id">CASE <b>01</b> · DETECTION</span>
+            <span class="case-tag">SOC / SIEM</span>
+          </div>
+          <h3>SOC Alert Triage &amp; Incident Investigation</h3>
+          <p>Worked through simulated SIEM alerts end to end — triaging events, correlating logs, separating true positives from noise, and documenting findings with recommended response actions in an analyst-style case report.</p>
+          <div class="case-foot">
+            <div class="tools"><span class="tool">Splunk</span><span class="tool">SIEM</span><span class="tool">Log Analysis</span></div>
+            <a class="case-link pending" href="#">repo · coming soon</a>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-top">
+            <span class="case-id">CASE <b>02</b> · THREAT INTEL</span>
+            <span class="case-tag">MITRE ATT&amp;CK</span>
+          </div>
+          <h3>Threat Profile — Valid Accounts (T1078)</h3>
+          <p>Built a threat-actor profile mapped to the MITRE ATT&amp;CK framework, breaking down how the Valid Accounts technique is used, the detection opportunities it creates, and practical mitigations a defender can put in place.</p>
+          <div class="case-foot">
+            <div class="tools"><span class="tool">MITRE ATT&amp;CK</span><span class="tool">Threat Research</span></div>
+            <a class="case-link pending" href="#">repo · coming soon</a>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-top">
+            <span class="case-id">CASE <b>03</b> · FORENSICS</span>
+            <span class="case-tag">DFIR</span>
+          </div>
+          <h3>Digital Forensics Case Study</h3>
+          <p>Conducted a disk-image investigation using proper evidence-handling and chain-of-custody procedures — recovering artifacts, reconstructing a timeline, and reporting findings in a format suitable for review.</p>
+          <div class="case-foot">
+            <div class="tools"><span class="tool">Autopsy</span><span class="tool">HxD</span><span class="tool">Chain of Custody</span></div>
+            <a class="case-link pending" href="#">repo · coming soon</a>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-top">
+            <span class="case-id">CASE <b>04</b> · NETWORK</span>
+            <span class="case-tag">PCAP</span>
+          </div>
+          <h3>Network Traffic &amp; Packet Analysis</h3>
+          <p>Analyzed captured network traffic to spot anomalies and suspicious flows — inspecting protocols, following streams, and documenting indicators that would warrant escalation in a live environment.</p>
+          <div class="case-foot">
+            <div class="tools"><span class="tool">Wireshark</span><span class="tool">NetworkMiner</span><span class="tool">TCP/IP</span></div>
+            <a class="case-link pending" href="#">repo · coming soon</a>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-top">
+            <span class="case-id">CASE <b>05</b> · AUTOMATION</span>
+            <span class="case-tag">PYTHON</span>
+          </div>
+          <h3>IOC Enrichment Automation</h3>
+          <p>Wrote a Python tool to take a list of indicators of compromise and enrich them automatically — reducing manual lookups and producing a clean, analyst-ready summary.</p>
+          <div class="case-foot">
+            <div class="tools"><span class="tool">Python</span><span class="tool">APIs</span><span class="tool">IOC Enrichment</span></div>
+            <a class="case-link pending" href="#">repo · coming soon</a>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-top">
+            <span class="case-id">CASE <b>06</b> · GRC</span>
+            <span class="case-tag">RISK</span>
+          </div>
+          <h3>NIST CSF Risk Assessment</h3>
+          <p>Performed a risk assessment against the NIST Cybersecurity Framework — identifying gaps, scoring risk, and recommending prioritized controls in a compliance-oriented report.</p>
+          <div class="case-foot">
+            <div class="tools"><span class="tool">NIST CSF</span><span class="tool">Risk Assessment</span><span class="tool">800-53</span></div>
+            <a class="case-link pending" href="#">repo · coming soon</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section id="creds">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">credentials</span><h2>Certifications &amp; education</h2></div>
+      <div class="about-grid">
+        <div class="reveal">
+          <h3 style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--signal);margin-bottom:16px;">Education</h3>
+          <div class="pc-row" style="border-top:0;"><span style="color:var(--text)">M.S. Cyber Operations</span><span style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.76rem;">In progress</span></div>
+          <div class="pc-row" style="border-color:var(--line)"><span style="color:var(--text)">B.S. Cybersecurity</span><span style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.76rem;">2024</span></div>
+          <div class="pc-row"><span style="color:var(--text)">A.A. Information Technology</span><span style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.76rem;">2022</span></div>
+        </div>
+        <div class="reveal">
+          <h3 style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--signal);margin-bottom:16px;">Certifications</h3>
+          <div class="chips">
+            <span class="chip">CompTIA Security+</span>
+            <span class="chip">Google Cybersecurity</span>
+            <span class="chip">Microsoft PL-900</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap reveal">
+      <span class="eyebrow" style="justify-content:center;">get in touch</span>
+      <h2>Let's talk security.</h2>
+      <p>Open to SOC analyst, security analyst, and GRC roles. The fastest way to reach me is email or LinkedIn.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:rahel.galato27@gmail.com">rahel.galato27@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/rahelgalato19/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="mono">© <span id="yr"></span> Rahel G.</span>
+    <span class="mono">Built &amp; deployed on GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+  // mobile nav
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
